@@ -15,6 +15,14 @@ import med.voll.api.endereco.Endereco;
 @EqualsAndHashCode(of = "id") //Gera os métodos equals() e hashCode(). O parâmetro of = "id" garante que esses métodos sejam baseados no campo id, o que é importante para a comparação de entidades no contexto de banco de dados.
 public class Medico {
 
+    public Medico(DadosCadastroMedico dados) {   
+        this.nome = dados.nome();
+        this.email = dados.email();
+        this.crm = dados.crm();
+        this.especialidade = dados.especialidade();
+        this.endereco = new Endereco(dados.endereco()); 
+    }
+
     //Indica que o campo id é a chave primária da entidade
     // efine que o valor do campo id será gerado automaticamente pelo banco de dados. O GenerationType.IDENTITY significa que o banco vai gerar esse valor (geralmente com incremento automático).
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
