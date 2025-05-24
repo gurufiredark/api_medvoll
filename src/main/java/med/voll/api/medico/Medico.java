@@ -25,7 +25,7 @@ public class Medico {
     }
 
     //Indica que o campo id é a chave primária da entidade
-    // efine que o valor do campo id será gerado automaticamente pelo banco de dados. O GenerationType.IDENTITY significa que o banco vai gerar esse valor (geralmente com incremento automático).
+    // Define que o valor do campo id será gerado automaticamente pelo banco de dados. O GenerationType.IDENTITY significa que o banco vai gerar esse valor (geralmente com incremento automático).
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
