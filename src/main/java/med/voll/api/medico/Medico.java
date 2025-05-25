@@ -16,6 +16,7 @@ import med.voll.api.endereco.Endereco;
 public class Medico {
 
     public Medico(DadosCadastroMedico dados) {   
+        this.ativo = true; //Inicializa o campo ativo como verdadeiro, indicando que o médico está ativo por padrão.
         this.nome = dados.nome();
         this.email = dados.email();
         this.telefone = dados.telefone();
@@ -41,6 +42,8 @@ public class Medico {
     @Embedded
     private Endereco endereco;
 
+    private Boolean ativo;
+
     public void atualizarInformacoes(DadosAtualizacaoMedico dados) {
         if(dados.nome() != null) {
             this.nome = dados.nome();
@@ -51,6 +54,10 @@ public class Medico {
         if(dados.endereco() != null) {
             this.endereco.atualizarInformacoes(dados.endereco());
         }
+    }
+
+    public void excluir() {
+        this.ativo = false; //Ao invés de remover o médico do banco de dados, o método apenas marca o médico como inativo, definindo o campo ativo como false. Isso é uma prática comum em sistemas onde você deseja manter o histórico dos registros, mas não quer que eles sejam mais considerados ativos.
     }
     
 }
