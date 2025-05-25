@@ -1,5 +1,6 @@
 package med.voll.api.medico;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -40,5 +41,17 @@ public class Medico {
     //Usada para indicar que o campo endereco é um objeto incorporado dentro da entidade Medico. Em vez de criar uma tabela separada para o endereço, o JPA vai mapear o campo endereco como parte da tabela medicos. Isso é útil para quando você tem um tipo de dado que não precisa ser uma entidade separada, mas é uma parte do objeto principal.
     @Embedded
     private Endereco endereco;
+
+    public void atualizarInformacoes(DadosAtualizacaoMedico dados) {
+        if(dados.nome() != null) {
+            this.nome = dados.nome();
+        }
+        if(dados.telefone() != null) {
+            this.telefone = dados.telefone();
+        }
+        if(dados.endereco() != null) {
+            this.endereco.atualizarInformacoes(dados.endereco());
+        }
+    }
     
 }
