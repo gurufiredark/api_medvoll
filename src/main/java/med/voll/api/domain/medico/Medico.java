@@ -1,11 +1,10 @@
-package med.voll.api.medico;
+package med.voll.api.domain.medico;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import med.voll.api.endereco.Endereco;
+import med.voll.api.domain.endereco.Endereco;
 
 @Table(name = "medicos") //Define o nome da tabela no banco de dados que será associada à classe Medico
 @Entity(name = "Medico") //Marca a classe como uma entidade JPA (Java Persistence API). Isso significa que a classe Medico será mapeada para uma tabela no banco de dados.
