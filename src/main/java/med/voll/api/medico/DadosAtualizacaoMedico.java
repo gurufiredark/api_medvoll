@@ -12,6 +12,5 @@ public record DadosAtualizacaoMedico(
     
     String telefone, 
     
-
     DadosEndereco endereco) {
 }
