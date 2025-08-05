@@ -1,9 +1,12 @@
 package med.voll.api.domain.consulta;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import med.voll.api.domain.ValidacaoException;
+import med.voll.api.domain.consulta.validacoes.cancelamento.ValidadorCancelamentoDeConsulta;
 import med.voll.api.domain.medico.Medico;
 import med.voll.api.domain.medico.MedicoRepository;
 import med.voll.api.domain.paciente.PacienteRepository;
@@ -19,6 +22,9 @@ public class AgendaDeConsultas {
 
     @Autowired
     private PacienteRepository pacienteRepository;
+
+    @Autowired
+    private List<ValidadorCancelamentoDeConsulta> validadoresCancelamento;
 
 
     public DadosDetalhamentoConsulta agendar(DadosAgendamentoConsulta dados) {
@@ -63,7 +69,9 @@ public class AgendaDeConsultas {
         throw new ValidacaoException("Id da consulta informado não existe!");
     }
 
+    validadoresCancelamento.forEach(v -> v.validar(dados));
+
     var consulta = consultaRepository.getReferenceById(dados.idConsulta());
     consulta.cancelar(dados.motivo());
-}
+    }
 }
