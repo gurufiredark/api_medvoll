@@ -1,6 +1,5 @@
 package med.voll.api.infra.security;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -43,8 +42,8 @@ public class SecurityConfigurations {
         return configuration.getAuthenticationManager();
     }
 
-    @Bean
+    @Bean   
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(); 
     }
 }
