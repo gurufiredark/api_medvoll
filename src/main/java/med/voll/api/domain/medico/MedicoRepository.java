@@ -14,14 +14,14 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
 
 
     @Query(value = """
-        select m from Medico m
+        select m from medicos m
         where
         m.ativo = true
         and
         m.especialidade = :especialidade
         and
         m.id not in(
-            select c.medico.id from Consulta c
+            select c.medicos.id from Consulta c
             where
             c.data = :data
         and
@@ -30,13 +30,10 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
         order by rand()
         limit 1
     """, nativeQuery = true)
-    Medico escolherMedicoAleatorioLivreNaData(
-        Especialidade especialidade,
-        LocalDateTime data
-    );
+    Medico escolherMedicoAleatorioLivreNaData(Especialidade especialidade, LocalDateTime data);
 
     @Query("""
-            SELECT m.ativo FROM Medico m
+            SELECT m.ativo FROM medicos m
             WHERE m.id = :id
         """)
     Boolean findAtivoById(Long id);
