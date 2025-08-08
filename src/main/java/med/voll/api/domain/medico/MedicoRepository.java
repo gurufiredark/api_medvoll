@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 
 public interface MedicoRepository extends JpaRepository<Medico, Long> {
@@ -13,27 +14,26 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
     Page<Medico> findAllByAtivoTrue(Pageable paginacao);
 
 
-    @Query(value = """
-        select m from medicos m
-        where
+    @Query("""
+        SELECT m FROM Medico m
+        WHERE
         m.ativo = true
-        and
+        AND
         m.especialidade = :especialidade
-        and
-        m.id not in(
-            select c.medicos.id from Consulta c
-            where
+        AND
+        m.id NOT IN(
+            SELECT c.medico.id FROM Consulta c
+            WHERE
             c.data = :data
-        and
-            c.motivoCancelamento is null
+            AND
+            c.motivoCancelamento IS NULL
         )
-        order by rand()
-        limit 1
-    """, nativeQuery = true)
+        ORDER BY FUNCTION('RAND')
+        """)
     Medico escolherMedicoAleatorioLivreNaData(Especialidade especialidade, LocalDateTime data);
 
     @Query("""
-            SELECT m.ativo FROM medicos m
+            SELECT m.ativo FROM Medico m
             WHERE m.id = :id
         """)
     Boolean findAtivoById(Long id);

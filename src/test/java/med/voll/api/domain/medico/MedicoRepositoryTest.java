@@ -33,12 +33,14 @@ public class MedicoRepositoryTest {
 
     @Test
     @DisplayName("Deve devolver null quando unico médico cadastrado não esta disponivel na data")
-    void testEscolherMedicoAleatorioLivreNaData() {
+    void testEscolherMedicoAleatorioLivreNaDataCenario1() {
 
-        var proximaSegundaAs10 = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.MONDAY)).atTime(10, 0);
+        var proximaSegundaAs10 = LocalDate.now()
+                .with(TemporalAdjusters.next(DayOfWeek.MONDAY))
+                .atTime(10, 0);
 
-        var medico = cadastrarMedico("Gabriel Lucas", "gabriellucas@voll.med", "123456", Especialidade.CARDIOLOGIA);
-        var paciente = cadastrarPaciente("João Silva", "joaosilva@email", "12345678900");
+        var medico = cadastrarMedico("Medico", "medico@voll.med", "123666", Especialidade.CARDIOLOGIA);
+        var paciente = cadastrarPaciente("Paciente", "paciente@email.com", "00000000000");
         cadastrarConsulta(medico, paciente, proximaSegundaAs10);
 
         var medicoLivre = medicoRepository.escolherMedicoAleatorioLivreNaData(Especialidade.CARDIOLOGIA, proximaSegundaAs10);
