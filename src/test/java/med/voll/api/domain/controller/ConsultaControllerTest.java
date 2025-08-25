@@ -39,6 +39,7 @@ public class ConsultaControllerTest {
     @Autowired
     private JacksonTester<DadosAgendamentoConsulta> dadosAgendamentoConsultaJson;
 
+    @Autowired
     private JacksonTester<DadosDetalhamentoConsulta> dadosDetalhamentoConsultaJson;
 
     @MockBean

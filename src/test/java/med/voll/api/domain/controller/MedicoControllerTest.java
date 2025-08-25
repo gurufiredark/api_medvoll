@@ -79,8 +79,8 @@ class MedicoControllerTest {
                 null,
                 dadosCadastro.nome(),
                 dadosCadastro.email(),
-                dadosCadastro.crm(),
                 dadosCadastro.telefone(),
+                dadosCadastro.crm(),      
                 dadosCadastro.especialidade(),
                 new Endereco(dadosCadastro.endereco())
         );
